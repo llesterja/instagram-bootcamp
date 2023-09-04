@@ -1,22 +1,30 @@
 import {React,useState} from 'react';
 import { push, ref, set } from "firebase/database";
 import { database, storage } from "../firebase";
+import {ref as storageRef, uploadBytes, getDownloadURL} from 'firebase/storage'
 
 const DB_MESSAGES_KEY = "messages";
+const STORAGE_KEY = "images/post"
 
 function InputForm(){
   const [state,setState]=useState({
     name: "",
     messageToSend:"",
+    fileInputFile:null,
   })
 
-  const writeData = () => {
+  const writeData = async () => {
     const messageListRef = ref(database, DB_MESSAGES_KEY);
     const newMessageRef = push(messageListRef);
-    set(newMessageRef, {
+    console.log(state.fileInputFile)
+    const fullStorageRef = storageRef(storage,STORAGE_KEY+state.fileInputFile.name);
+    await uploadBytes(fullStorageRef,state.fileInputFile);
+    const url= await getDownloadURL(fullStorageRef,state.fileInputFile.name);
+    await set(newMessageRef, {
       username:state.name,
       messageBody:state.messageToSend,
       date: new Date().toLocaleString(),
+      imageURL: url,
     });
   };
 
@@ -24,11 +32,20 @@ function InputForm(){
     event.preventDefault(event);
     writeData();
   }
+
   const handleNameSubmit = (event) =>{
     event.preventDefault(event);
     setState({...state,
       displayName:state.name
   });
+  }
+  
+  const handleFileInput = (e) =>{
+    console.log(e)
+    setState({
+      ...state,fileInputFile:e.target.files[0],
+    })
+
   }
   
   const handleChange =(e) =>{
@@ -61,6 +78,13 @@ function InputForm(){
         value={state.messageToSend}
         onChange={(e)=>handleChange(e)}
       />
+      <br/>
+      <input
+        type='file'
+        name='file'
+        onChange={(e)=>handleFileInput}
+      />
+      <br/>
       <button onClick={handleSubmit}>Send</button>
     </form>}
       <br/>
