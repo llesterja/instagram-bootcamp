@@ -4,7 +4,7 @@ import { database, storage } from "../firebase";
 import {ref as storageRef, uploadBytes, getDownloadURL} from 'firebase/storage'
 
 const DB_MESSAGES_KEY = "messages";
-const STORAGE_KEY = "images/post"
+const STORAGE_KEY = "images/post/"
 
 function InputForm(){
   const [state,setState]=useState({
@@ -82,7 +82,7 @@ function InputForm(){
       <input
         type='file'
         name='file'
-        onChange={(e)=>handleFileInput}
+        onChange={(e)=>handleFileInput(e)}
       />
       <br/>
       <button onClick={handleSubmit}>Send</button>

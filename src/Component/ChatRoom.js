@@ -44,6 +44,8 @@ const ChatRoom=()=>{
                   [{message.val.date}] </p> 
                   <p style={{fontSize:"24px"}}>{message.val.username}: {message.val.messageBody}  </p>
               </div>
+
+              <img src={message.val.imageURL} alt={message.val.imageName}/>
             </li>
           </>
         ))):<p>There are no messages now!</p>}
