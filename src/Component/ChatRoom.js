@@ -1,6 +1,7 @@
 import React, {useState,useEffect} from "react";
 import { onChildAdded, ref } from "firebase/database";
 import { database, storage } from "../firebase";
+import RocketPost from "./RocketPost";
 
 const DB_MESSAGES_KEY = "messages";
 
@@ -34,23 +35,29 @@ const ChatRoom=()=>{
 
 
   return(
+    <>
     <div style={{display:"flex",backgroundColor:"Azure",justifyContent:"space-between",width:"70vw"}}>
       <ul style={{listStyleType:"none",width:"95%"}}>
         {messages.length>0?(messages.map((message) => (
           <>
+            
             <li key={message.key} style={{display:"flex",marginRight:"35px",backgroundColor:"MidnightBlue",borderRadius:"20px",marginBottom:"10px"}}>
-              <div style={{margin:"0px 10px"}}>
+              
+              {!message.val.imageURL?
+                <div style={{margin:"0px 10px"}}>
                 <p style={{fontSize:"15px",alignContent:"flex-start"}}>
                   [{message.val.date}] </p> 
                   <p style={{fontSize:"24px"}}>{message.val.username}: {message.val.messageBody}  </p>
               </div>
-
-              <img src={message.val.imageURL} alt={message.val.imageName}/>
+              :
+              <RocketPost post={message.val}/>}
             </li>
           </>
         ))):<p>There are no messages now!</p>}
       </ul>
     </div>
+
+    </>
   )
 }
 
