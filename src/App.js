@@ -6,7 +6,7 @@ import logo from "./logo.png";
 import "./App.css";
 import ChatRoom from "./Component/ChatRoom";
 import InputForm from "./Component/InputForm";
-import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 // Save the Firebase message folder name as a constant to avoid bugs due to misspelling
 const DB_MESSAGES_KEY = "messages";

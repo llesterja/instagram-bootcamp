@@ -13,7 +13,7 @@ function InputForm(){
     fileInputFile:null,
   })
 
-  const writeData = async () => {
+  const writeData = async (fileInputFile) => {
     const messageListRef = ref(database, DB_MESSAGES_KEY);
     const newMessageRef = push(messageListRef);
     console.log(state.fileInputFile)
@@ -24,13 +24,19 @@ function InputForm(){
       username:state.name,
       messageBody:state.messageToSend,
       date: new Date().toLocaleString(),
+      imageName:fileInputFile.name,
       imageURL: url,
     });
   };
 
   const handleSubmit = (event) =>{
     event.preventDefault(event);
-    writeData();
+    writeData(state.fileInputFile);
+    setState({
+      ...state,
+      messageToSend:"",
+      fileInputFile:null,
+    })
   }
 
   const handleNameSubmit = (event) =>{
@@ -64,6 +70,7 @@ function InputForm(){
 
     {!state.displayName?
     <form>
+
       <input
         name="name"
         value={state.name}
@@ -73,6 +80,7 @@ function InputForm(){
     </form>
       :
     <form>
+      <label>Enter message here:</label>
       <input
         name="messageToSend"
         value={state.messageToSend}
