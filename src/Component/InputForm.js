@@ -3,7 +3,7 @@ import { push, ref, set } from "firebase/database";
 import { database, storage } from "../firebase";
 import {ref as storageRef, uploadBytes, getDownloadURL} from 'firebase/storage'
 
-const DB_MESSAGES_KEY = "messages";
+const DB_MESSAGES_KEY = "post";
 const STORAGE_KEY = "images/post/"
 
 function InputForm(){
@@ -65,7 +65,7 @@ function InputForm(){
 
   return(
     <>
-      {state.displayName?<p>Hi {state.displayName}! Start Chatting!</p>:<p>Enter name to start chatting!</p>}
+      {state.displayName?<p>Hi {state.displayName}! Start Chatting!</p>:<p>Enter username to start posting!</p>}
       
 
     {!state.displayName?

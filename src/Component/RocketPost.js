@@ -5,7 +5,7 @@ import ListGroup from 'react-bootstrap/ListGroup';
 function RocketPost(props){
   
   return(
-    <Card style={{ width: '18rem' }}>
+    <Card style={{ margin:'10px'}}>
       <Card.Img variant="top" src={props.post.imageURL} />
       <Card.Body>
         <Card.Title>Card Title</Card.Title>

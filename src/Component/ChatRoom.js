@@ -3,7 +3,7 @@ import { onChildAdded, ref } from "firebase/database";
 import { database, storage } from "../firebase";
 import RocketPost from "./RocketPost";
 
-const DB_MESSAGES_KEY = "messages";
+const DB_MESSAGES_KEY = "post";
 
 const ChatRoom=()=>{
   const [messages,setMessages] = useState([]);
@@ -41,7 +41,7 @@ const ChatRoom=()=>{
         {messages.length>0?(messages.map((message) => (
           <>
             
-            <li key={message.key} style={{display:"flex",marginRight:"35px",backgroundColor:"MidnightBlue",borderRadius:"20px",marginBottom:"10px"}}>
+            <li key={message.key} style={{display:"flex",backgroundColor:"MidnightBlue",borderRadius:"20px",marginBottom:"10px",justifyContent:"center"}}>
               
               {!message.val.imageURL?
                 <div style={{margin:"0px 10px"}}>

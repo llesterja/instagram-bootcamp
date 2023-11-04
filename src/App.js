@@ -8,9 +8,6 @@ import ChatRoom from "./Component/ChatRoom";
 import InputForm from "./Component/InputForm";
 
 
-// Save the Firebase message folder name as a constant to avoid bugs due to misspelling
-const DB_MESSAGES_KEY = "messages";
-const STORAGE_KEY = "images/post"
 
 function App () {
 
@@ -19,7 +16,7 @@ function App () {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <h1>
-          Rocketgram Chat App
+          Rocketgram Insta Posts
         </h1>
 
         <InputForm/>
